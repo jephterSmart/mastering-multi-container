@@ -4,5 +4,18 @@ services:
     image: 'mongo'
     volumes:
       - data:/data/db
+  goal-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - '80:80'
+    depends_on:
+      - goal-db
 volumes:
   data:
+  logs:
