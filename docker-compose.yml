@@ -16,6 +16,19 @@ services:
       - '80:80'
     depends_on:
       - goal-db
+  goal-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app/src
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    depends_on:
+      - goal-backend
+    stdin_open: true
+    tty: true
 volumes:
   data:
   logs:
